@@ -1,0 +1,357 @@
+%-------------------------------------------------------------------------------
+%
+% TUM Dissertation Template
+%
+% For usage instructions see README.md
+%
+% Authors:
+%   Andre Richter, andre.richter@tum.de
+%   Michael Vonbun, michael.vonbun@tum.de
+%   Christian Herber, christian.herber@tum.de
+%   Stefan Wallentowitz, stefan.wallentowitz@tum.de
+%
+%-------------------------------------------------------------------------------
+\documentclass[%
+  % layouttitlepage,            % layout help rules (to see if you need
+  %                             % some extra vspace in your title etc.)
+  % headings = standardclasses, % serif fonts for headings
+  % headings = big,             % If you use serif fonts for headings (above option
+  %                             % uncommmented), uncomment this one to get smaller
+  %                             % headings
+  % sansseriftitlepage,         % sans serif title page
+  % notocintoc,                 % do not add toc to toc itself
+]{tumDiss}
+\usepackage[utf8]{inputenc}
+
+%-------------------------------------------------------------------------------
+% Binding correction for the title page.
+% WARNING: ONLY NEEDED FOR THE PRINT VERSION!
+%
+% After printing and binding, the left part of the titlepage may lose
+% significant space, for example due to overlap from glue binding.
+% You can increase the left margin of the title page with this option.
+% This value of 8mm was measured for glue binding a thesis that was printed by
+% the TUM Fachschaft EI and ~140 pages.
+%-------------------------------------------------------------------------------
+% \titlepagebindingcor{8mm}
+
+%-------------------------------------------------------------------------------
+% Binding correction for everything else.
+% Does not affect titlePageBindingCor!
+%
+% WARNING: THIS OPTION CAN SHAKE UP YOUR CURRENT LAYOUT.
+% If you want to use it, it is best to work with it from the very start. Adding
+% it when finishing your dissertation might get you into trouble.
+%
+% Search http://texdoc.net/texmf-dist/doc/latex/koma-script/scrguien.pdf for
+% "BCOR" for further reading.
+%-------------------------------------------------------------------------------
+% \KOMAoptions{BCOR=3mm}
+
+%-------------------------------------------------------------------------------
+% Faculty
+%-------------------------------------------------------------------------------
+\faculty{TUM School of Medicine and Health}
+
+%-------------------------------------------------------------------------------
+% Degree
+%-------------------------------------------------------------------------------
+\degree{Doktors der Naturwissenschaften\\(Dr. rer.\ nat.)}
+
+%-------------------------------------------------------------------------------
+% Title
+%
+% IMPORTANT:
+%
+% You must add manual line breaks here. If you don't, you'll get uneven spacing
+% between the lines.
+% YOU ALSO NEED THE BREAK AT THE LAST LINE.
+%-------------------------------------------------------------------------------
+\title{Deep Clustering of Animal Motion Tracking Data: \\ }
+\subtitle{software development and applications to \\ psychiatric preclinical research}
+
+%-------------------------------------------------------------------------------
+% People
+%-------------------------------------------------------------------------------
+\author{Lucas Miranda}
+\vorsitz{ }
+\erstpruef{Prof.\ Dr.\ Bertram Müller-Myhsok}
+
+% Use this one for a TUM professor
+% \zweitpruef{Prof. Dr.-Ing. Vorname Nachname}
+
+% Or this one for an external professor
+\zweitpruef{Prof.\ Dr.\ Julien Gagneur}
+
+% Optionally, add a third examiner
+%\drittpruef[RWTH Aachen]{Prof. Dr.-Ing. Max Mustermann}
+
+%-------------------------------------------------------------------------------
+% Hand in date
+%
+% This is the date of your personal hand-in at the TUM doctoral office.
+%-------------------------------------------------------------------------------
+\date{18.07.2023}
+
+%-------------------------------------------------------------------------------
+% Accepted date
+%
+% You can set this after your thesis was accepted. For handing in,
+% it is not needed (at least for the Electrical Engineering faculty).
+%-------------------------------------------------------------------------------
+\dateaccepted{08.11.2023}
+
+
+
+%-------------------------------------------------------------------------------
+% Change language, e.g. to german
+%-------------------------------------------------------------------------------
+\usepackage[main=english, german]{babel}
+
+%-------------------------------------------------------------------------------
+% Compatibility issues
+%-------------------------------------------------------------------------------
+% If you need pstricks, load it here before everything else.
+% Otherwise, tikz patterns won't work
+%\usepackage{pstricks}
+
+%-------------------------------------------------------------------------------
+% Suggested standard packets are included here
+%-------------------------------------------------------------------------------
+% Loading scrhack fixes:
+%   (1) KOMA-Script incompatible macros used in listings package.
+%   (2) Inconsistent anchors in hyperref.
+\usepackage{scrhack}
+
+
+% figure inclusion
+\usepackage[
+  caption = false,
+  font    = footnotesize
+]{subfig}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\tikzset{>=stealth}
+\usetikzlibrary{patterns}
+\usetikzlibrary{pgfplots.statistics}
+
+% code block insertion
+\usepackage{moreverb}
+\usepackage{listings}
+
+% math and equations
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{upgreek}
+
+\expandafter\def\expandafter\normalsize\expandafter{%
+  \normalsize  
+  \setlength\abovedisplayskip{4ex}
+  \setlength\belowdisplayskip{4ex}
+  \setlength\abovedisplayshortskip{4ex}
+  \setlength\belowdisplayshortskip{4ex}
+}
+
+% enumeration
+\usepackage{enumerate}
+
+% Source code with highlighting
+\usepackage{listings}
+\lstset{
+  basicstyle       = \footnotesize,
+  captionpos       = b,
+  tabsize          = 4,
+  commentstyle     = \color{TUMGreen},
+  keywordstyle     = \color{TUMBlue},
+  stringstyle      = \color{TUMOrange},
+  otherkeywords    = {
+    uint64_t,
+    uint32_t,
+    uint16_t,
+    uint8_t,
+    u64,
+    u32,
+    u16,
+    u8,
+    inline
+  },
+  numbers          = left,
+  xleftmargin      = 7ex,
+  aboveskip        = 4ex,
+  abovecaptionskip = 2ex,
+}
+
+% Support for siunitx
+\usepackage{siunitx}
+\sisetup{
+  exponent-product = \cdot,
+  output-product   = \cdot,
+  per-mode         = symbol-or-fraction,
+  quotient-mode    = fraction,
+  binary-units     = true
+}
+
+% No widows and orphans
+\usepackage[all]{nowidow}
+
+% dummy text
+\usepackage{pdfpages}
+\usepackage{float}
+
+% hyperlinks
+% according to its documentation, hyperref should be loaded last
+% a list of packages that should be loaded after hyperref can be found at
+% https://tex.stackexchange.com/questions/1863/which-packages-should-be-loaded-after-hyperref-instead-of-before
+\usepackage{url}
+\usepackage[
+  hidelinks,
+  bookmarksnumbered,
+  breaklinks,
+]{hyperref}
+
+% If hyperref is used, references to tables and figures link to their captions
+% and not the actual tables or figures. This is especially unwanted for figures,
+% because their captions are below the figure so that clicking on a link just
+% shows the captions and the figure is invisible.
+%
+% Using the caption package fixes this behaviour.
+\usepackage{caption}
+
+% glossary functionality
+% loading glossaries after hyperref adds hyperlings to acronyms and glossary
+% entries
+\usepackage[
+  toc,
+  acronym,
+  style = long
+]{glossaries}
+\makeglossaries
+
+%-------------------------------------------------------------------------------
+% Include custom packages here
+%-------------------------------------------------------------------------------
+
+\usepackage[resetlabels,labeled]{multibib}
+\newcites{PhD}{List of published PhD papers}
+
+%-------------------------------------------------------------------------------
+% TUM CI colors for PGF
+%-------------------------------------------------------------------------------
+\definecolor{grey60} {RGB} {102, 102, 102} % 60% grey
+
+%-------------------------------------------------------------------------------
+% Default values for pgfplots
+%-------------------------------------------------------------------------------
+\newcommand{\figureHeight}{0.5625} %% 16:9
+\pgfplotsset{
+  compat           = 1.13,
+  grid             = major,
+  enlarge x limits = 0,
+  cycle list name  = tum,
+  major grid style = {dotted},
+  minor grid style = {dotted},
+  legend style     = {
+    at     = {(0.98,0.96)},
+    anchor = north east,
+  },
+  width            = \hsize * 0.9,
+  height           = \hsize * 0.9 * \figureHeight,
+}
+
+%-------------------------------------------------------------------------------
+% Correct bad hyphenation here
+%-------------------------------------------------------------------------------
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+%-------------------------------------------------------------------------------
+% Acronyms (will be sorted alphabetically)
+%-------------------------------------------------------------------------------
+\include{Sections/acronyms}
+
+% BP marginpar
+\newcommand{\bpmp}[1]{\marginpar{{\tiny BP: #1}}}
+\newcommand{\python}[1]{{\texttt{#1}}}
+\newcommand{\cref}[1]{chapter~\ref{#1}}
+\newcommand{\Cref}[1]{Chapter~\ref{#1}}
+\newcommand{\Sim}{\mathrm{Sim}}
+\newcommand{\josstitle}{\textbf{``DeepOF: a Python package for supervised and unsupervised pattern recognition in mice motion tracking data"}}
+\newcommand{\natcommtitle}{\textbf{``Automatically annotated motion tracking identifies a distinct social behavioral profile following chronic social defeat stress"}}
+\newcommand{\fullncref}{can be retrieved from the publication \natcommtitle, included as part of \cref{chap:natcomm}}
+%-------------------------------------------------------------------------------
+% Actual document starts here
+%-------------------------------------------------------------------------------
+\begin{document}
+\frontmatter
+\maketitle
+
+%-------------------------------------------------------------------------------
+\chapter{Acknowledgements}
+\include{Sections/acknowledgements.tex}
+
+%-------------------------------------------------------------------------------
+\chapter{Abstract}
+\include{Sections/abstract.tex}
+
+%-------------------------------------------------------------------------------
+\chapter{Zusammenfassung}
+\include{Sections/Zusammenfassung.tex}
+
+%-------------------------------------------------------------------------------
+
+\tableofcontents
+\listoffigures
+\listoftables
+
+\printglossary[type=\acronymtype, nonumberlist]
+
+%-------------------------------------------------------------------------------
+\mainmatter
+\chapter{Introduction}
+\label{chap:introduction}
+\include{Sections/introduction.tex}
+
+\chapter{State of the Art}
+\label{chap:sota}
+\include{Sections/sota.tex}
+
+\chapter{Methods}
+\label{chap:methods}
+\include{Sections/methods.tex}
+
+\chapter{DeepOF: a Python package for pattern recognition in mice motion tracking data}
+\label{chap:joss}
+\include{Sections/joss.tex}
+
+\chapter{Characterizing CSDS using automatically annotated motion tracking data}
+\label{chap:natcomm}
+\include{Sections/natcomm.tex}
+
+\chapter{Discussion}
+\label{chap:discussion}
+\include{Sections/discussion.tex}
+
+\chapter{Conclusion \& Outlook}
+\label{chap:conclusions}
+\include{Sections/conclusions.tex}
+
+%-------------------------------------------------------------------------------
+% Bibliography
+%-------------------------------------------------------------------------------
+%\backmatter
+% unsrturl-custom works only with hyperref loaded
+% use other styles like unsrt when hyperref is not loaded
+\bibliographystyle{unsrturl-custom}
+\bibliography{bibliography}
+
+\nocitePhD{*}
+\bibliographystylePhD{unsrturl-custom}
+\bibliographyPhD{phd_bibliography}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
